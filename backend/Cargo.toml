@@ -1,0 +1,27 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Web framework
+axum = "0.6"
+
+# Asynchronous runtime
+tokio = { version = "1", features = ["full"] }
+
+# Serialization/Deserialization
+serde = { version = "1.0", features = ["derive"] }
+
+# Environment variable management
+dotenv = "0.15"
+
+# Solana SDK for program interaction
+solana-sdk = "1.14.18"
+
+# Solana client for RPC-related functionality
+solana-client = "1.14.18"
+
+# Additional dependencies (optional but useful for Solana projects)
+thiserror = "1.0" # Error handling
+log = "0.4"       # Logging

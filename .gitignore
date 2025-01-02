@@ -1,0 +1,35 @@
+# Node Modules (if any frontend dependencies exist in the root)
+node_modules/
+
+# Rust build files
+target/
+
+# Solana ledger files
+test-ledger/
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Backup and temporary files
+*.bak
+*.tmp
+*.swp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor-specific files
+.vscode/
+.idea/
+*.iml
+
+# Cargo lock files (optional, depending on your dependency management strategy)
+Cargo.lock
+
+# Other potentially sensitive or unnecessary files
+*.key
+*.pem
