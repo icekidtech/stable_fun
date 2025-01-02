@@ -1,5 +1,5 @@
 use solana_client::rpc_client::RpcClient;
-use solana_sdk::{signature::Keypair, transaction::Transaction};
+use solana_sdk::signature::Keypair;
 use crate::utils;
 
 pub async fn mint_stablecoins(amount: u64, wallet_address: &str) -> Result<(), String> {
