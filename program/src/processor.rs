@@ -1,3 +1,4 @@
+use crate::state::TokenState;
 use crate::instruction::StablecoinInstruction; // Import the StablecoinInstruction enum
 use crate::error::StablecoinError; // Import the StablecoinError enum
 use borsh::{BorshDeserialize, BorshSerialize};
