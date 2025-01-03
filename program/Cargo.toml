@@ -4,28 +4,15 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-solana-program = "1.18.26"
-solana-sdk = "1.18.26"
-spl_governance = "1.18.26"
-spl_governance_tools = "1.18.26"
-spl_governance_tools_bpf = "1.18.26"
-spl_governance_tools_bpf_macros = "1.18.26"
-spl_governance_tools_bpf_macros_support = "1.18.26"
-spl_governance_tools_bpf_macros_support_build = "1.18.26"
-spl_governance_tools_bpf_macros_support_proc_macro = "1.18.26"
-spl_governance_tools_bpf_macros_support_proc_macro2 = "1.18.26"
-spl_governance_tools_bpf_macros_support_quote = "1.18.26"
-spl_governance_tools_bpf_macros_support_syn = "1.18.26"
-spl_governance_tools_bpf_macros_support_synstructure = "1.18.26"
-spl_governance_tools_bpf_macros_support_textwrap = "1.18.26"
-spl_governance_tools_bpf_macros_support_version_check = "1.18.26"
-spl_governance_tools_bpf_macros_support_version_check_macros = "1.18.26"
-spl_governance_tools_bpf_macros_support_version_check_proc_macro = "1.18.26"
-spl_governance_tools_bpf_macros_support_version_check_proc_macro2 = "1.18.26"
-spl_governance_tools_bpf_macros_support_version_check_quote = "1.18.26"
-spl_governance_tools_bpf_macros_support_version_check_syn = "1.18.26"
-spl_governance_tools_bpf_macros_support_version_check_synstructure = "1.18.26"
-spl_governance_tools_bpf_macros_support_version_check_textwrap = "1.18.26"
-borsh = "0.10.4"
-borsh-derive = "0.10.4"
-thiserror = "1.0"
+solana-program = "2.1.7"
+solana-sdk = "2.1.7"
+spl-governance = "4.0.0"
+borsh = "1.5.3"
+borsh-derive = "1.5.3"
+thiserror = "1.0.69"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[features]
+default = []

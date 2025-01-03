@@ -7,12 +7,10 @@ use solana_program::{
     entrypoint::ProgramResult,
     log::sol_log,
     program_error::ProgramError,
-    pubkey::Pubkey,
 };
 
 // The main processor function for handling all instructions
 pub fn process(
-    program_id: &Pubkey,
     accounts: &[AccountInfo],
     instruction_data: &[u8],
 ) -> ProgramResult {
@@ -24,17 +22,17 @@ pub fn process(
         StablecoinInstruction::InitializeToken { name, symbol } => {
             // Log the initialization action
             sol_log(&format!("Initializing token: {} ({})", name, symbol));
-            initialize_token(program_id, accounts, name, symbol)?;
+            initialize_token(accounts, name, symbol)?;
         }
         StablecoinInstruction::Mint { amount } => {
             // Log the minting action
             sol_log(&format!("Minting {} tokens", amount));
-            mint_tokens(program_id, accounts, amount)?;
+            mint_tokens(accounts, amount)?;
         }
         StablecoinInstruction::Redeem { amount } => {
             // Log the redemption action
             sol_log(&format!("Redeeming {} tokens", amount));
-            redeem_tokens(program_id, accounts, amount)?;
+            redeem_tokens(accounts, amount)?;
         }
     }
 
@@ -43,7 +41,6 @@ pub fn process(
 
 // Function to handle the InitializeToken instruction
 fn initialize_token(
-    program_id: &Pubkey,
     accounts: &[AccountInfo],
     name: String,
     symbol: String,
@@ -76,7 +73,6 @@ fn initialize_token(
 
 // Function to handle the Mint instruction
 fn mint_tokens(
-    _program_id: &Pubkey,
     accounts: &[AccountInfo],
     amount: u64,
 ) -> ProgramResult {
@@ -100,7 +96,6 @@ fn mint_tokens(
 
 // Function to handle the Redeem instruction
 fn redeem_tokens(
-    _program_id: &Pubkey,
     accounts: &[AccountInfo],
     amount: u64,
 ) -> ProgramResult {
@@ -118,8 +113,7 @@ fn redeem_tokens(
     if token_state.total_supply < amount {
         return Err(ProgramError::InsufficientFunds);
     }
-
-    // Deduct the amount from the total supply
+    // Update the total supply
     token_state.total_supply -= amount;
     // Serialize the updated token state back to the account
     token_state.serialize(&mut &mut mint_account.data.borrow_mut()[..])?;

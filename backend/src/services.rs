@@ -8,8 +8,10 @@ use solana_sdk::{
 use std::env;
 use std::str::FromStr;
 use once_cell::sync::Lazy;
-use crate::utils;
 use program::instruction::StablecoinInstruction; // Import the StablecoinInstruction type
+use solana_sdk::instruction::AccountMeta; // Import the AccountMeta type
+use solana_sdk::signature::Signer; // Import the Signer trait
+use crate::config; // Import the config module
 
 static PROGRAM_ID: Lazy<Pubkey> = Lazy::new(|| {
     let program_id_str = env::var("PROGRAM_ID").expect("PROGRAM_ID must be set");
@@ -17,7 +19,8 @@ static PROGRAM_ID: Lazy<Pubkey> = Lazy::new(|| {
 });
 
 pub async fn mint_stablecoins(amount: u64, wallet_address: &str) -> Result<(), String> {
-    let rpc_client = RpcClient::new(utils::get_rpc_url());
+    let config = config::load_config();
+    let rpc_client = RpcClient::new(config.rpc_url);
     let keypair_path = env::var("KEYPAIR_PATH").expect("KEYPAIR_PATH must be set");
     let mint_keypair = read_keypair_file(&keypair_path).map_err(|e| e.to_string())?;
 
@@ -43,7 +46,8 @@ pub async fn mint_stablecoins(amount: u64, wallet_address: &str) -> Result<(), S
 }
 
 pub async fn redeem_stablecoins(amount: u64, wallet_address: &str) -> Result<(), String> {
-    let rpc_client = RpcClient::new(utils::get_rpc_url());
+    let config = config::load_config();
+    let rpc_client = RpcClient::new(config.rpc_url);
     let keypair_path = env::var("KEYPAIR_PATH").expect("KEYPAIR_PATH must be set");
     let mint_keypair = read_keypair_file(&keypair_path).map_err(|e| e.to_string())?;
 
