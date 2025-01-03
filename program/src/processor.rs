@@ -1,7 +1,7 @@
-use crate::{error::StablecoinError, instruction::StablecoinInstruction, state::TokenState};
+use crate::{error::StablecoinError, instruction::StablecoinInstruction};
 use borsh::BorshDeserialize;
 use solana_program::{
-    account_info::{next_account_info, AccountInfo},
+    account_info::AccountInfo,
     entrypoint::ProgramResult,
     pubkey::Pubkey,
 };
