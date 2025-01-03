@@ -1,3 +1,5 @@
+use borsh;
+
 #[cfg(test)]
 mod tests {
     use program::processor;
@@ -12,10 +14,10 @@ mod tests {
         let instruction_data = StablecoinInstruction::InitializeToken {
             name: "Test Token".to_string(),
             symbol: "TEST".to_string(),
-        }
-        .try_to_vec()
-        .unwrap();
-        processor::process(accounts, &instruction_data).unwrap();
+        };
+        let mut buffer = Vec::new();
+        <StablecoinInstruction as borsh::BorshSerialize>::serialize(&instruction_data, &mut buffer).unwrap();
+        processor::process(accounts, &buffer).unwrap();
         // Test the initialize_token logic
     }
 }
