@@ -1,3 +1,4 @@
+use borsh::BorshSerialize;
 use crate::{error::StablecoinError, instruction::StablecoinInstruction};
 use borsh::BorshDeserialize;
 use solana_program::{
@@ -63,7 +64,7 @@ fn initialize_token(
     }
 
     // Ensure the rent sysvar account is provided
-    if rent_sysvar_account.key != &Rent::id() {
+    if rent_sysvar_account.key != &Rent::free() {
         return Err(ProgramError::IncorrectProgramId);
     }
 
@@ -75,7 +76,12 @@ fn initialize_token(
     };
 
     // Pack the token state into the token account
-    token_state.serialize(&mut &mut token_account.data.borrow_mut()[..])?;
+    #[derive(BorshDeserialize, BorshSerialize, Debug)]
+    pub struct TokenState {
+        pub name: String,
+        pub symbol: String,
+        pub total_supply: u64,
+    }
 
     // Set the token account's owner to the program ID
     token_account.owner = program_id;
@@ -144,7 +150,7 @@ fn redeem_tokens(
     let authority_account = next_account_info(accounts_iter)?;
 
     // Ensure the mint account is writable
-    ```rust
+    
     if !mint_account.is_writable {
         return Err(ProgramError::IncorrectProgramId);
     }
@@ -184,12 +190,4 @@ fn redeem_tokens(
     sender_balance.serialize_varint(&mut &mut sender_account.data.borrow_mut()[..])?;
 
     Ok(())
-}
-
-/// Token state structure
-#[derive(BorshDeserialize, BorshSerialize, Debug)]
-pub struct TokenState {
-    pub name: String,
-    pub symbol: String,
-    pub total_supply: u64,
 }
