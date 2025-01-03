@@ -7,7 +7,6 @@ use solana_program::{
     log::sol_log,
     program_error::ProgramError,
     pubkey::Pubkey,
-    sysvar::rent::Rent,
 };
 
 // The main processor function for handling all instructions

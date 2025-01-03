@@ -4,6 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+
+program = { path = "../program" }  # Adjust the path to your Solana program
+
 # Web framework
 axum = "0.6"
 

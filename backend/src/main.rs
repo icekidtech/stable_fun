@@ -7,8 +7,8 @@ mod utils;
 #[tokio::main]
 async fn main() {
     let app = Router::new()
-        .route("/mint", post(routes::mint_stablecoins))
-        .route("/redeem", post(routes::redeem_stablecoins));
+    .route("/mint", post(routes::mint_stablecoins))
+    .route("/redeem", post(routes::redeem_stablecoins));
 
     let config = config::load_config();
 
