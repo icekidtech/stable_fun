@@ -1,11 +1,16 @@
+use std::env;
+use std::str::FromStr;
+use once_cell::sync::Lazy;
 use solana_sdk::{
     instruction::Instruction,
     pubkey::Pubkey,
-    system_instruction,
     transaction::Transaction,
 };
 
-let program_id = Pubkey::from_str(&env::var("PROGRAM_ID").expect)
+static PROGRAM_ID: Lazy<Pubkey> = Lazy::new(|| {
+    let program_id_str = env::var("PROGRAM_ID").expect("PROGRAM_ID must be set");
+    Pubkey::from_str(&program_id_str).expect("Invalid PROGRAM_ID format")
+});
 
 pub async fn mint_stablecoins(amount: u64, wallet_address: &str) -> Result<(), String> {
     let rpc_client = RpcClient::new(utils::get_rpc_url());
