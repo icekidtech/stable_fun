@@ -17,7 +17,7 @@ mod tests {
         };
         let mut buffer = Vec::new();
         <StablecoinInstruction as borsh::BorshSerialize>::serialize(&instruction_data, &mut buffer).unwrap();
-        processor::process(accounts, &buffer).unwrap();
+        processor::process(&accounts, &buffer).unwrap();
         // Test the initialize_token logic
     }
 }
