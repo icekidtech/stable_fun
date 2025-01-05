@@ -33,3 +33,4 @@ Cargo.lock
 # Other potentially sensitive or unnecessary files
 *.key
 *.pem
+.codegpt
