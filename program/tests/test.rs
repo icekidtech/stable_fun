@@ -1,4 +1,3 @@
-use borsh;
 
 #[cfg(test)]
 mod tests {
@@ -8,7 +7,7 @@ mod tests {
 
     #[test]
     fn test_initialize_token() {
-        let program_id = Pubkey::new_unique();
+        let _program_id = Pubkey::new_unique();
         // Mock accounts and data
         let accounts = vec![];
         let instruction_data = StablecoinInstruction::InitializeToken {
