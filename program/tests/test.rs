@@ -10,13 +10,14 @@ fn test_initialize_token() {
 
     // Mock accounts
     let mut lamports = 0;
+    let mut data = [0; 100]; // Initialize with a larger buffer
     let owner = Pubkey::new_unique();
     let token_account = AccountInfo::new(
         &program_id,
         false,
         true,
         &mut lamports,
-        &mut [0; 0],
+        &mut data,
         &owner,
         false,
         0,
